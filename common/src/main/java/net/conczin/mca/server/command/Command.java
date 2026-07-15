@@ -12,6 +12,7 @@ import net.conczin.mca.entity.ai.chatAI.ChatAI;
 import net.conczin.mca.entity.ai.chatAI.OpenAIChatAI;
 import net.conczin.mca.network.Network;
 import net.conczin.mca.network.s2c.OpenGuiRequest;
+import net.conczin.mca.registry.EntitiesMCA;
 import net.conczin.mca.server.ServerInteractionManager;
 import net.conczin.mca.server.world.data.PlayerSaveData;
 import net.minecraft.ChatFormatting;
@@ -20,6 +21,7 @@ import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 
 import java.net.URLEncoder;
@@ -29,6 +31,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Command {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
@@ -78,6 +81,11 @@ public class Command {
                         .then(Commands.literal("realtime").executes(ctx -> ttsEnable(ctx, "realtime")))
                         .then(Commands.literal("disable").executes(Command::ttsDisable))
                 )
+                //should be replaced with a better way like a button in villager interacting screen
+                .then(Commands.literal("setNickname")
+                        .then(Commands.argument("villagerName", StringArgumentType.string())
+                                .then(Commands.argument("nickname", StringArgumentType.string())
+                                        .executes(Command::setNickname))))
         );
     }
 
@@ -235,6 +243,33 @@ public class Command {
             }
         });
         return 0;
+    }
+
+    //should be replaced with a better way like a button in villager interacting screen
+    private static int setNickname(CommandContext<CommandSourceStack> ctx) {
+        ServerPlayer player = ctx.getSource().getPlayer();
+        if (player == null) return 1;
+
+        String villagerName =
+                StringArgumentType.getString(ctx, "villagerName");
+        String nickname =
+                StringArgumentType.getString(ctx, "nickname");
+
+        Optional<VillagerEntityMCA> villager = getLoadedVillagers(ctx)
+                .filter(v -> v.getName().getString().equals(villagerName))
+                .findFirst();
+
+        villager.ifPresent(villagerEntityMCA -> {
+            villagerEntityMCA.setNicknames(player.getUUID(), nickname);
+            sendMessage(ctx, "Set nickname \"" + nickname + "\" to " + villagerEntityMCA.getName().getString());
+        });
+
+        return 0;
+    }
+
+    private static Stream<VillagerEntityMCA> getLoadedVillagers(final CommandContext<CommandSourceStack> ctx) {
+        ServerLevel world = ctx.getSource().getLevel();
+        return Stream.concat(world.getEntities(EntitiesMCA.FEMALE_VILLAGER, x -> true).stream(), world.getEntities(EntitiesMCA.MALE_VILLAGER, x -> true).stream());
     }
 
     private static int propose(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
