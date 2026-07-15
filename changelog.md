@@ -1,3 +1,19 @@
+# 7.7.22
+
+* Fixed Rare Crash
+* Fixed Library Preview rare corruption issue.
+* Improved guard enemy reaction interval with no performance loss.
+
+# 7.7.21
+
+* Fixed Villagers not being able to get through doors cause of their width.
+
+# 7.7.20
+
+* Fixed Rumours not working and throwing an error.
+* Fixed villager name changes not applying
+* Fixed typo in pastries.json which caused an error
+
 # 7.7.19
 
 * Fixed MCA Debug Editor breaking when editing a character while it is sitting down. 
