@@ -87,10 +87,7 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 import java.util.function.Predicate;
 
 
@@ -126,6 +123,8 @@ public class VillagerEntityMCA extends Villager implements VillagerLike<Villager
     private boolean recoveryFoodFromInventory;
     private int recoveryFoodUseTicks;
     private ItemStack recoveryPreviousMainHand = ItemStack.EMPTY;
+
+    private final Nickname nicknames = new Nickname();
 
     public VillagerEntityMCA(EntityType<VillagerEntityMCA> type, Level w, Gender gender) {
         super(type, w);
@@ -1476,6 +1475,7 @@ public class VillagerEntityMCA extends Villager implements VillagerLike<Villager
         getTypeDataManager().load(this, data);
         relations.readFromNbt(data);
         longTermMemory.readFromNbt(data);
+        nicknames.readFromNbt(data);
 
         playerModel = PlayerModel.byId(data.getInt("PlayerModel"));
 
@@ -1523,6 +1523,7 @@ public class VillagerEntityMCA extends Villager implements VillagerLike<Villager
 
         relations.writeToNbt(nbt);
         longTermMemory.writeToNbt(nbt);
+        nicknames.writeToNbt(nbt);
 
         getTypeDataManager().save(this, nbt);
         InventoryUtils.saveToNBT(this.registryAccess(), inventory, nbt);
@@ -1630,5 +1631,13 @@ public class VillagerEntityMCA extends Villager implements VillagerLike<Villager
     public void customLevelUp() {
         this.setVillagerData(this.getVillagerData().setLevel(this.getVillagerData().getLevel() + 1));
         this.updateTrades();
+    }
+
+    public Nickname getNicknames() {
+        return nicknames;
+    }
+
+    public void setNicknames(UUID playerUUID, String nickname) {
+        nicknames.data.put(playerUUID, nickname);
     }
 }
