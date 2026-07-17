@@ -24,7 +24,9 @@ public enum Personality {
     RELAXED,       // Calm and unbothered
     ANXIOUS,       // Easily stressed
     PEACEFUL,      // Avoids conflict
-    UPBEAT;        // Optimistic and cheerful
+    UPBEAT,        // Optimistic and cheerful
+
+    TSUNDERE;
 
     private static final RandomSource random = RandomSource.create();
 

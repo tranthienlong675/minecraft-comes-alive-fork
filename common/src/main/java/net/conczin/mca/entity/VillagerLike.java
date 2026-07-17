@@ -145,7 +145,7 @@ public interface VillagerLike<E extends Entity & VillagerLike<E>> extends CTrack
     default Set<Gender> getAttractedGenderSet(VillagerLike<?> villager) {
         if (villager.getTraits().hasTrait(Traits.BISEXUAL)) {
             return Set.of(Gender.MALE, Gender.FEMALE, Gender.NEUTRAL);
-        } else if (villager.getTraits().hasTrait(Traits.HOMOSEXUAL)) {
+        } else if (villager.getTraits().hasTrait(Traits.HOMOSEXUAL) || villager.getTraits().hasTrait(Traits.FEMBOY)) {
             return Set.of(villager.getGenetics().getGender(), Gender.NEUTRAL);
         } else if (villager.getTraits().hasTrait(Traits.ASEXUAL)) {
             return Set.of(Gender.NEUTRAL);

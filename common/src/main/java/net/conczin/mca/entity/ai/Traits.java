@@ -44,6 +44,8 @@ public class Traits {
     public static Trait NO_AGING = registerTrait("no_aging", 0.0F, 0.0F, false);
     // public static Trait UNKNOWN = registerTrait("unknown", 0.0F, 0.0F, false);
 
+    public static Trait FEMBOY = registerTrait("femboy", 0.0F, 0.0F, false);
+
     private final VillagerLike<?> entity;
     private RandomSource random = RandomSource.create();
 

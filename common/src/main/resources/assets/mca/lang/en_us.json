@@ -231,6 +231,8 @@
   "personality.gloomy": "Gloomy",
   "personality.peaceful": "Peaceful",
 
+  "personality.tsundere": "Tsundere",
+
   "personalityDescription.unassigned": "Something went wrong",
   "personalityDescription.friendly": "Bonus hearts for interactions",
   "personalityDescription.flirty": "Bonus points for specific interactions",
@@ -246,6 +248,8 @@
   "personalityDescription.anxious": "Easily scared",
   "personalityDescription.gloomy": "Always assuming the worst",
   "personalityDescription.peaceful": "Avoids conflict whenever possible",
+
+  "personalityDescription.tsundere": "Cold, bratty and distant outside. But gentle, soft and adorable inside",
 
   "traits.title": "Traits: ",
   "trait.athletic": "Athletic",
@@ -270,6 +274,8 @@
   "trait.tough": "Tough",
   "trait.weak": "Weak",
   "trait.unknown": "Unknown",
+
+  "trait.femboy": "Femboy",
  
   "traitDescription.athletic": "Runs faster",
   "traitDescription.lactose_intolerance": "Intolerant to lactose.",
@@ -293,6 +299,8 @@
   "traitDescription.tough": "Tough as nails, and deals quite some blows.",
   "traitDescription.weak": "Weak bones, weak muscles.",
   "traitDescription.unknown": "Once this villager had a trait, but is now lost to time.",
+
+  "traitDescription.femboy": "Boys with feminine characteristics. They love acting cute and soft, like a girl.",
 
   "sirben": "*random Sirben noises*",
 
