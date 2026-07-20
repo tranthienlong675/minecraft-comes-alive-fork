@@ -26,7 +26,8 @@ public enum Personality {
     PEACEFUL,      // Avoids conflict
     UPBEAT,        // Optimistic and cheerful
 
-    TSUNDERE;
+    TSUNDERE,
+    YANDERE;
 
     private static final RandomSource random = RandomSource.create();
 

@@ -232,6 +232,7 @@
   "personality.peaceful": "Peaceful",
 
   "personality.tsundere": "Tsundere",
+  "personality.yandere": "Yandere",
 
   "personalityDescription.unassigned": "Something went wrong",
   "personalityDescription.friendly": "Bonus hearts for interactions",
@@ -250,6 +251,7 @@
   "personalityDescription.peaceful": "Avoids conflict whenever possible",
 
   "personalityDescription.tsundere": "Cold, bratty and distant outside. But gentle, soft and adorable inside",
+  "personalityDescription.yandere": "Love like a psychopath.",
 
   "traits.title": "Traits: ",
   "trait.athletic": "Athletic",
