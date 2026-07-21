@@ -19,7 +19,7 @@ public class ChatAI {
     /**
      * Max time until a conversation is considered invalid
      */
-    private static final int CONVERSATION_TIME = 2400;
+    private static final int CONVERSATION_TIME = 1800;
 
     /**
      * Max distance until a conversation is considered invalid
