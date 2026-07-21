@@ -2,6 +2,8 @@ package net.conczin.mca.item;
 
 import net.conczin.mca.Config;
 import net.conczin.mca.entity.VillagerEntityMCA;
+import net.conczin.mca.entity.ai.Memories;
+import net.conczin.mca.entity.ai.Relationship;
 import net.conczin.mca.server.world.data.PlayerSaveData;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.Item;
@@ -21,6 +23,9 @@ public class BouquetItem extends RelationshipItem {
         PlayerSaveData playerData = PlayerSaveData.get(player);
         String response;
 
+        if (Relationship.IS_MARRIED.test(villager, player)) {
+            return true;
+        }
         if (super.handle(player, villager)) {
             return false;
         } else {
