@@ -19,6 +19,7 @@ import net.conczin.mca.network.Network;
 import net.conczin.mca.network.c2s.GetVillagerRequest;
 import net.conczin.mca.network.c2s.VillagerEditorSyncRequest;
 import net.conczin.mca.network.c2s.VillagerNameRequest;
+import net.conczin.mca.network.c2s.VillagerRevealRequest;
 import net.conczin.mca.registry.EntitiesMCA;
 import net.conczin.mca.registry.ProfessionsMCA;
 import net.conczin.mca.resources.FaceList;
@@ -340,6 +341,7 @@ public class VillagerEditorScreen extends Screen implements SkinListUpdateListen
             //close
             doneWidget = addRenderableWidget(new ButtonWidget(width / 2 - DATA_WIDTH + 20, height / 2 + 98, DATA_WIDTH - 40, 20, Component.translatable("gui.done"), sender -> {
                 syncVillagerData();
+                Network.sendToServer(new VillagerRevealRequest(villagerUUID));
                 onClose();
             }));
 

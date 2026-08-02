@@ -34,6 +34,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -211,6 +212,8 @@ public class VillagerEntityMCA extends Villager implements VillagerLike<Villager
         super.defineSynchedData(builder);
 
         getTypeDataManager().register(builder);
+
+        builder.define(HIDDEN, Boolean.FALSE);
     }
 
     @Override
@@ -1671,4 +1674,15 @@ public class VillagerEntityMCA extends Villager implements VillagerLike<Villager
             nicknames.data.put(playerUUID, nickname.trim());
         }
     }
+
+    public void setHidden(boolean value) {
+        this.entityData.set(HIDDEN, value);
+    }
+
+    public boolean isHidden() {
+        return this.entityData.get(HIDDEN);
+    }
+
+    private static final EntityDataAccessor<Boolean> HIDDEN =
+            SynchedEntityData.defineId(VillagerEntityMCA.class, EntityDataSerializers.BOOLEAN);
 }

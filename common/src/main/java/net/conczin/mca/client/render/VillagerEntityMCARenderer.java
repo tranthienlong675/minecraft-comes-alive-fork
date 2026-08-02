@@ -1,5 +1,6 @@
 package net.conczin.mca.client.render;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.conczin.mca.client.model.VillagerEntityModelMCA;
 import net.conczin.mca.client.render.layer.ClothingLayer;
 import net.conczin.mca.client.render.layer.FaceLayer;
@@ -10,6 +11,7 @@ import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 
 public class VillagerEntityMCARenderer extends VillagerLikeEntityMCARenderer<VillagerEntityMCA> {
@@ -29,5 +31,13 @@ public class VillagerEntityMCARenderer extends VillagerLikeEntityMCARenderer<Vil
 
     private static VillagerEntityModelMCA<VillagerEntityMCA> createVisibleModel(MeshDefinition data) {
         return new VillagerEntityModelMCA<>(LayerDefinition.create(data, 64, 64).bakeRoot());
+    }
+
+    @Override
+    public void render(VillagerEntityMCA entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
+
+        if (entity.isHidden()) return;
+
+        super.render(entity, entityYaw, partialTicks, poseStack, buffer, packedLight);
     }
 }

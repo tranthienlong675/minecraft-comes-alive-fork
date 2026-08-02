@@ -34,6 +34,7 @@ public interface MessagesMCA {
         c.register(VillagerEditorSyncRequest.TYPE, VillagerEditorSyncRequest.STREAM_CODEC, true);
         c.register(VillagerNameRequest.TYPE, VillagerNameRequest.STREAM_CODEC, true);
         c.register(ConfirmBuildingPolymorphMessage.TYPE, ConfirmBuildingPolymorphMessage.STREAM_CODEC, true);
+        c.register(VillagerRevealRequest.TYPE, VillagerRevealRequest.STREAM_CODEC, true);
 
         c.register(AnalysisResults.TYPE, AnalysisResults.STREAM_CODEC, false);
         c.register(BabyNameResponse.TYPE, BabyNameResponse.STREAM_CODEC, false);

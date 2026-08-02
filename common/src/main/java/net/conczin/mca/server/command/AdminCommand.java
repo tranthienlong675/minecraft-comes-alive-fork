@@ -11,10 +11,13 @@ import net.conczin.mca.Config;
 import net.conczin.mca.entity.VillagerEntityMCA;
 import net.conczin.mca.entity.ai.relationship.RelationshipState;
 import net.conczin.mca.item.BabyItem;
+import net.conczin.mca.network.Network;
+import net.conczin.mca.network.s2c.OpenGuiRequest;
 import net.conczin.mca.registry.DataComponentsMCA;
 import net.conczin.mca.registry.EntitiesMCA;
 import net.conczin.mca.server.SpawnQueue;
 import net.conczin.mca.server.world.data.*;
+import net.conczin.mca.util.WorldUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.commands.CommandSourceStack;
@@ -31,6 +34,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -68,7 +72,38 @@ public class AdminCommand {
                                 .then(Commands.argument("value", BoolArgumentType.bool())
                                         .executes(AdminCommand::toggleOverrideVillageRequirements))))
                 .requires((serverCommandSource) -> serverCommandSource.hasPermission(2))
+
+                .then(register("spawnAndEditVillager", AdminCommand::spawnAndEditVillager))
+                .then(register("revealAllHiddenVillager", AdminCommand::revealAllHiddenVillager))
         );
+    }
+
+    private static int revealAllHiddenVillager(CommandContext<CommandSourceStack> ctx) {
+        getLoadedVillagers(ctx).forEach(v -> {
+            v.setHidden(false);
+            v.setNoAi(false);
+        });
+        return 0;
+    }
+
+    private static int spawnAndEditVillager(CommandContext<CommandSourceStack> ctx) {
+        ServerPlayer player = ctx.getSource().getPlayer();
+
+        if (player != null) {
+            ServerLevel world = ctx.getSource().getLevel();
+
+            VillagerEntityMCA villager = EntitiesMCA.FEMALE_VILLAGER.create(world);
+
+            if (villager != null) {
+                villager.setPos(player.getX(), player.getY(), player.getZ());
+                villager.setNoAi(true);
+                villager.setHidden(true);
+
+                WorldUtils.spawnEntity(world, villager, MobSpawnType.COMMAND);
+                Network.sendToPlayer(new OpenGuiRequest(OpenGuiRequest.Type.VILLAGER_EDITOR, villager), player);
+            }
+        }
+        return 0;
     }
 
     private static int listVillages(CommandContext<CommandSourceStack> ctx) {
