@@ -389,6 +389,9 @@ public interface VillagerLike<E extends Entity & VillagerLike<E>> extends CTrack
         if (getTraits().hasTrait(Traits.ATHLETIC)) {
             speed *= 1.1f;
         }
+        if (getTraits().hasTrait(Traits.SIRBEN_ASCENDANT)) {
+            speed *= 1.5f;
+        }
 
         speed /= (0.9f + getGenetics().getGene(Genetics.WIDTH) * 0.2f);
         speed *= (0.9f + getGenetics().getGene(Genetics.SIZE) * 0.2f);
@@ -407,6 +410,9 @@ public interface VillagerLike<E extends Entity & VillagerLike<E>> extends CTrack
         }
         if (getTraits().hasTrait(Traits.TOUGH)) {
             damageMultiplier *= 1.5f;
+        }
+        if (getTraits().hasTrait(Traits.SIRBEN_ASCENDANT)) {
+            damageMultiplier *= 3.5f;
         }
         AttributeInstance attackAttributeInstance = asEntity().getAttribute(Attributes.ATTACK_DAMAGE);
         if (attackAttributeInstance != null) {

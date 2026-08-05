@@ -573,6 +573,10 @@ public class VillagerEntityMCA extends Villager implements VillagerLike<Villager
             damageAmount *= 0.75f;
         }
 
+        if (getTraits().hasTrait(Traits.SIRBEN_ASCENDANT)) {
+            damageAmount *= 0.3f;
+        }
+
         if (!level().isClientSide) {
             //scream and loose hearts
             if (source.getEntity() instanceof Player player) {
@@ -902,7 +906,7 @@ public class VillagerEntityMCA extends Villager implements VillagerLike<Villager
             }
 
             // sirben noises
-            if (this.tickCount % 60 == 0 && random.nextInt(50) == 0 && traits.hasTrait(Traits.SIRBEN)) {
+            if (this.tickCount % 60 == 0 && random.nextInt(50) == 0 && (traits.hasTrait(Traits.SIRBEN) || traits.hasTrait(Traits.SIRBEN_ASCENDANT))) {
                 sendChatToAllAround("sirben");
             }
 

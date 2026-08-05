@@ -44,6 +44,11 @@ public class Traits {
     public static Trait NO_AGING = registerTrait("no_aging", 0.0F, 0.0F, false);
     // public static Trait UNKNOWN = registerTrait("unknown", 0.0F, 0.0F, false);
 
+    public static Trait CHILD_OF_SIRBEN = registerTrait("child_of_sirben", 0.0F, 0.0F, false);
+    public static Trait PSYCHIC_EYES = registerTrait("psychic_eyes", 0.0F, 0.0F, false);
+    public static Trait SIRBEN_ASCENDANT = registerTrait("sirben_ascendant", 0.0F, 0.0F, false);
+    public static Trait GHOST = registerTrait("ghost", 0.0F, 0.0F, false);
+
     private final VillagerLike<?> entity;
     private RandomSource random = RandomSource.create();
 
