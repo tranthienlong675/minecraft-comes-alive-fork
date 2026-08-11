@@ -1689,4 +1689,10 @@ public class VillagerEntityMCA extends Villager implements VillagerLike<Villager
 
     private static final EntityDataAccessor<Boolean> HIDDEN =
             SynchedEntityData.defineId(VillagerEntityMCA.class, EntityDataSerializers.BOOLEAN);
+
+    @Override
+    public boolean causeFallDamage(float fallDistance, float multiplier, DamageSource source) {
+        if (getTraits().hasTrait(Traits.SIRBEN_ASCENDANT)) return false;
+        return super.causeFallDamage(fallDistance, multiplier, source);
+    }
 }
